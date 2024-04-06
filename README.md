@@ -1,10 +1,11 @@
 
-#   SA 03 W03 CODE CHALLENGE
+# FLATADANGO
 
-6<sup>th</sup> April 2024
+## SA 03 W03 CODE CHALLENGE
 
-#### By *Keith Owino*
+Build date : **6<sup>th</sup> April 2024**
 
+Author : **Keith Owino**
 
 This document was created with Javascript
 
@@ -17,7 +18,19 @@ Here i implement a mini web app that demonstrates my understanding of the three 
   * Manipulating the DOM
   * Communicating with the Server.
 
+I will be building out an application that allows a user to purchase movie tickets from the theater.
 
+### Core Deliverables
+
+As a user, i would like to be able to:-
+ * See the first movie's details, including its poster, title, runtime, showtime, and available tickets when the page loads.
+ * See a menu of all movies on the left side of the page.
+ * Buy a ticket for a movie. After clicking the "Buy Ticket" button, I should see the number of available tickets decreasing on the frontend. I should not be able to buy a ticket if the showing is sold out.
+ * Delete a film from the server. 
+ * When a movie is sold out (when there are no available tickets remaining), indicate that the movie is sold out by changing the button text to "Sold Out". 
+
+<br>
+ 
 >Love this project? Buy me a coffee...
 ---
 
