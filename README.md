@@ -24,6 +24,31 @@ I will be building out an application that allows a user to purchase movie ticke
 
 As a user, i would like to be able to:-
  * See the first movie's details, including its poster, title, runtime, showtime, and available tickets when the page loads.
+
+    ![Expected layout](https://curriculum-content.s3.amazonaws.com/phase-1/phase-1-code-challenge-flatdango/flatdango-demo.gif)
+
+    ```js
+
+        function codeBlock(){
+            // endpoint.
+            const endpointA = "http://localhost:3000/films/1";
+
+            // interaction.
+            const filmTitle = document.getElementById("title");
+            /* SOME MORE CODE HERE... */
+
+            // fetch
+            return fetch(endpointA)
+                .then(res => res.json())
+                .then((data) => {
+                filmTitle.textContent = data.title;
+                /* SOME MORE CODE HERE... */
+                })
+                /* SOME MORE CODE HERE... */
+        };
+
+    ```
+
  * See a menu of all movies on the left side of the page.
  * Buy a ticket for a movie. After clicking the "Buy Ticket" button, I should see the number of available tickets decreasing on the frontend. I should not be able to buy a ticket if the showing is sold out.
  * Delete a film from the server. 
