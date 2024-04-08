@@ -37,8 +37,8 @@ function firstMovieDetails(){
     .catch(error => alert(error.message));
 
   purchaseTicket.addEventListener("click", (e) => {
-    if(filmTicketNum.innerHTML >= 1){
-      filmTicketNum.innerHTML -= 1;
+    if(parseInt(filmTicketNum.innerHTML) >= 1){
+      filmTicketNum.innerHTML = parseInt(filmTicketNum.innerHTML) - 1;
     };
 
     // let ticketNum = parseInt(filmTicketNum.innerHTML);
