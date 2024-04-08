@@ -1,6 +1,6 @@
 // Your code here
 
-function facilitateInt(){
+function firstMovieDetails(){
   // First movie endpoint url.
   const endpointA = "http://localhost:3000/films/1";
 
@@ -23,6 +23,33 @@ function facilitateInt(){
       filmTicketNum.textContent = (data.capacity - data.tickets_sold);
     })
     .catch(error => alert(error.message));
+};
+
+function movieMenu(){
+  const endpointB = "http://localhost:3000/films";
+
+  const folder = document.getElementById("films")
+
+  return fetch(endpointB)
+    .then(res => res.json())
+    .then((data) => {
+      let pickTitles = (value) => {
+        let li = document.createElement("li");
+        li.classList.add("film", "item");
+        li.textContent = value.title;
+
+        folder.appendChild(li);
+      };
+
+      data.forEach(pickTitles);
+
+    })
+    .catch(error => alert(error.message))
+};
+
+function facilitateInt(){
+  firstMovieDetails()
+  movieMenu()
 };
 
 document.addEventListener("DOMContentLoaded", facilitateInt);

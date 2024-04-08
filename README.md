@@ -49,7 +49,33 @@ As a user, i would like to be able to:-
 
     ```
 
- * See a menu of all movies on the left side of the page.
+ * See a menu of all movies on the left side of the page:
+    
+    ```js
+
+        function movieMenu(){
+            const endpointB = "http://localhost:3000/films";
+
+            const folder = document.getElementById("films")
+
+            return fetch(endpointB)
+                .then(res => res.json())
+                .then((data) => {
+                let pickTitles = (value) => {
+                    let li = document.createElement("li");
+                    li.classList.add("film", "item");
+                    li.textContent = value.title;
+
+                    folder.appendChild(li);
+                };
+
+                data.forEach(pickTitles);
+
+                })
+                /* SOME MORE CODE HERE... */
+            };
+
+    ```
  * Buy a ticket for a movie. After clicking the "Buy Ticket" button, I should see the number of available tickets decreasing on the frontend. I should not be able to buy a ticket if the showing is sold out.
  * Delete a film from the server. 
  * When a movie is sold out (when there are no available tickets remaining), indicate that the movie is sold out by changing the button text to "Sold Out". 
