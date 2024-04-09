@@ -1,17 +1,5 @@
 // Your code here
 
-/*
-
-Buy a ticket for a movie. After clicking the "Buy Ticket" button, I should see the number of available tickets decreasing on the frontend. I should not be able to buy a ticket if the showing is sold out (if there are 0 tickets available). A persistence mechanism is needed for this feature. Read the following paragraph for more details.
-
-When a ticket is purchased, you need to do the following
-
-Persist the updated number of tickets_sold on the server. Remember, the frontend shows the number of available tickets based on the tickets_sold and the capacity, so only the tickets_sold should be updated on the backend when a ticket is purchased. You will need to make a request that follows this structure:
-
-POST the new ticket to the tickets endpoint in the database
-
-*/
-
 function firstMovieDetails(){
   // First movie endpoint url.
   const endpointA = "http://localhost:3000/films/1";
@@ -24,30 +12,34 @@ function firstMovieDetails(){
   const filmTicketNum = document.getElementById("ticket-num");
   const purchaseTicket = document.getElementById("buy-ticket");
 
-  // init fetch
   fetch(endpointA)
-    .then(res => res.json())
-    .then((data) => {
-      filmTitle.textContent = data.title;
-      filmRuntime.textContent = data.runtime + " minutes";
-      filmBio.textContent = data.description;
-      filmShowtime.textContent = data.showtime;
-      filmTicketNum.textContent = (data.capacity - data.tickets_sold);
+    .then(response => response.json())
+    .then(data => {
+      currentMovie(data);
+      console.log(data);
     })
     .catch(error => alert(error.message));
 
-  purchaseTicket.addEventListener("click", (e) => {
-    if(parseInt(filmTicketNum.innerHTML) >= 1){
-      filmTicketNum.innerHTML = parseInt(filmTicketNum.innerHTML) - 1;
-    };
+  function currentMovie(movie){
+    filmTitle.textContent = movie.title;
+    filmRuntime.textContent = movie.runtime + " minutes";
+    filmBio.textContent = movie.description;
+    filmShowtime.textContent = movie.showtime;
+    filmTicketNum.textContent = (movie.capacity - movie.tickets_sold);
 
-    // let ticketNum = parseInt(filmTicketNum.innerHTML);
-    // if(ticketNum >= 1){
-    //   filmTicketNum.innerHTML = (ticketNum - 1);
-    // }else if(ticketNum < 1){
-    //   purchaseTicket.innerHTML = "Sold Out";
-    // };
-  })
+      purchaseTicket.addEventListener("click", (e) => {
+        buyTicket(movie);
+      })
+  };
+
+  function buyTicket(movie){
+    if(movie.capacity > movie.tickets_sold){
+      movie.tickets_sold++;
+      filmTicketNum.textContent = (movie.capacity - movie.tickets_sold);
+      updateMovieDetails(movie);
+    };
+  };
+
 };
 
 function movieMenu(){
@@ -70,6 +62,19 @@ function movieMenu(){
 
     })
     .catch(error => alert(error.message))
+};
+
+function updateMovieDetails(movieObj){
+  fetch(`http://localhost:3000/films/${movieObj.id}`, {
+    method : "PATCH", 
+    header : {
+      "content-type" : "application/json"
+    }, 
+    body : JSON.stringify(movieObj)
+  })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => alert(error.message));
 };
 
 function facilitateInt(){
